@@ -1,0 +1,44 @@
+server:
+    port: 8081
+
+service:
+    name: env
+    version: 1.0.0
+    project: ebrick
+
+env: development
+
+database:
+    enable: true
+    host: host.docker.internal
+    port: 5432
+    user: postgres
+    password: postgres
+    dbname: postgres
+    sslmode: disable
+    type: postgresql
+
+cache:
+    enable: true
+    type: redis
+    addrs: host.docker.internal:6379
+    user:
+    password:
+
+messaging:
+    enable: true
+    type: nats
+    url: nats://host.docker.internal:4223
+    user:
+    password:
+
+observability:
+    tracing:
+        enable: true
+        type: tempo
+        endpoint: host.docker.internal:4317
+oidc:
+    enable: false
+    issuer: http://localhost:9080/realms/linkify
+    clientId: opsweaver
+    clientSecret: opsweaver

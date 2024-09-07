@@ -28,7 +28,7 @@ cache:
 messaging:
     enable: true
     type: nats
-    url: nats://host.docker.internal:4223
+    url: nats://host.docker.internal:4222
     user:
     password:
 

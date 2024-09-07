@@ -3,11 +3,11 @@ import { sleep } from 'k6';
 
 export let options = {
   vus: 1, // Number of virtual users
-  iterations: 10, // Number of iterations
+  iterations: 15, // Number of iterations
 };
 
 export default function () {
-  let server_list = ["localhost:8080"];
+  let server_list = ["localhost:8080", "localhost:8082"]; // Add more servers
   let endpoint_list = ["/api/tenants"];
   let names = ["linkify", "example", "test"]; // Add more names if needed
 

@@ -7,6 +7,7 @@ import (
 	"github.com/google/uuid"
 )
 
+// ValidateTenantID validates the tenant ID in the request
 func ValidateTenantID() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		tenantId := ctx.Param("tenant_id")

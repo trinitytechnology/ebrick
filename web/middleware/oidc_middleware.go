@@ -35,6 +35,7 @@ func InitOIDC() {
 	}
 }
 
+// OIDCAuthMiddleware adds OIDC authentication to the request context
 func OIDCAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		cfg := config.GetConfig().Oidc

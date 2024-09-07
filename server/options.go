@@ -4,7 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/linkifysoft/ebrick/config"
 	"github.com/linkifysoft/ebrick/logger"
-	"github.com/linkifysoft/ebrick/server/middleware"
+	"github.com/linkifysoft/ebrick/observability"
+	"github.com/linkifysoft/ebrick/web"
 	"go.uber.org/zap"
 )
 
@@ -14,24 +15,25 @@ type Options struct {
 	Logger *zap.Logger
 	Router *gin.Engine
 }
+
 type Option func(*Options)
 
 func newOptions(opts ...Option) Options {
 	serverCfg := config.GetConfig().Server
-	env := config.GetConfig().Env
+	envCfg := config.GetConfig().Env
+	obsCfg := config.GetConfig().Observability
 
-	// Set Gin to release mode
-	gin.SetMode(gin.ReleaseMode)
+	webRouter := web.InitRouter()
 
-	router := gin.New()
-	router.Use(middleware.TracingMiddleware(), middleware.LoggingMiddleware())
-	setupProbeRoute(router)
+	if obsCfg.Tracing.Enable {
+		webRouter.Use(observability.TracingMiddleware(), observability.LoggingWithTraceIDMiddleware())
+	}
 
 	opt := Options{
 		Port:   serverCfg.Port,
-		Env:    env,
+		Env:    envCfg,
 		Logger: logger.DefaultLogger,
-		Router: router,
+		Router: webRouter,
 	}
 
 	for _, o := range opts {

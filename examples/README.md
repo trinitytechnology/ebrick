@@ -7,13 +7,13 @@ Furthermore, if the need arises, you can easily switch back to a monolithic arch
 ## Bootstrap infrastructure
 
 ```bash
-docker compose -f docker-compose-infra.yml up -d
+docker compose -f ./docker/docker-compose-infra.yml up -d
 ```
 
 ## Bootstrap Observability
 
 ```bash
-docker compose -f docker-compose-observability.yml up -d
+docker compose -f ./docker/docker-compose-observability.yml up -d
 ```
 
 ## Running the monolithic application
@@ -43,8 +43,11 @@ go run main.go
 curl -X POST -H "Content-Type: application/json" -d '{"name": "linkify"}' http://localhost:8080/api/tenants
 ```
 
-## Testing with K6
+## Testing with K6 
+
+  Install K6 [K6 Installation](https://grafana.com/docs/k6/latest/set-up/install-k6/) 
 
 ```bash
+cd load-test
 k6 run k6-scripts.js
 ```

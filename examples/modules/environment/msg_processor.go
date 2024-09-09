@@ -9,7 +9,6 @@ import (
 	"github.com/linkifysoft/ebrick/messaging"
 	"github.com/linkifysoft/ebrick/observability"
 	"github.com/linkifysoft/ebrick/utils"
-	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
 	"go.uber.org/zap"
@@ -23,7 +22,8 @@ type Tenant struct {
 // configureConsumers sets up the consumers for the CloudEventStream to process incoming events.
 func configureConsumers(stream messaging.CloudEventStream, service EnvironmentService) {
 
-	serviceName := "environment"
+	serviceName := Module.Name()
+	subject := "tenant.created"
 	// Start a new goroutine to handle the subscription
 	if err := stream.CreateConsumerGroup("tenant", serviceName, messaging.ConsumerConfig{
 		AckWait:        30 * time.Second,
@@ -35,14 +35,12 @@ func configureConsumers(stream messaging.CloudEventStream, service EnvironmentSe
 	}
 
 	go func() {
-		err := stream.Subscribe("tenant.created", serviceName, func(ev *event.Event, ctx context.Context) error {
+		err := stream.Subscribe(subject, serviceName, func(ev *event.Event, ctx context.Context) error {
 			// Logger with trace ID from the context
 			log := observability.LoggerWithTraceID(ctx)
 
-			// Extract the tracing context and start a new span
-			tracer := otel.Tracer(serviceName)
-			ctx, span := tracer.Start(ctx, "Process Tenant Created Event")
-			span.SetAttributes(attribute.String("subject", ev.Type()), attribute.String("source", ev.Source()), attribute.String("module", "environment"))
+			// Use the helper function to start a new span
+			ctx, span := observability.StartEventSpan(ctx, serviceName, "Tenant's Environment Creation", ev)
 			defer span.End()
 
 			tent, err := utils.UnmarshalJSONByte[Tenant](ev.Data())

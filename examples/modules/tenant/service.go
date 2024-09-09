@@ -37,7 +37,7 @@ func (t *tenantService) PostProccess(ctx context.Context, tent *Tenant) error {
 
 	tracer := otel.Tracer("tenant")
 	ctx, span := tracer.Start(ctx, "Send Tenant Created Event")
-	span.SetAttributes(attribute.String("tenant.id", tent.ID.String()), attribute.String("module", "tenant"))
+	span.SetAttributes(attribute.String("tenant_id", tent.ID.String()), attribute.String("module", "tenant"))
 
 	defer span.End()
 	// Create a new CloudEvent

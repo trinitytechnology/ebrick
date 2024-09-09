@@ -3,7 +3,7 @@ package environment
 import (
 	"context"
 
-	"go.opentelemetry.io/otel"
+	"github.com/linkifysoft/ebrick/observability"
 	"go.opentelemetry.io/otel/attribute"
 	"go.uber.org/zap"
 )
@@ -17,9 +17,9 @@ type envService struct {
 
 // CreateEnvironment implements EnvironmentService.
 func (t *envService) CreateEnvironment(ctx context.Context, env Environment) (*Environment, error) {
-	var tracer = otel.Tracer("env")
-	_, span := tracer.Start(ctx, "Create Environment")
-	span.SetAttributes(attribute.String("env.tenant_id", env.TenantId.String()), attribute.String("env.name", env.Name))
+
+	_, span := observability.StartSpan(ctx, Module.Name(), "Create Environment")
+	span.SetAttributes(attribute.String("env_tenant_id", env.TenantId.String()), attribute.String("env_name", env.Name))
 	defer span.End()
 
 	createdEnvironment, err := t.repo.Create(env)

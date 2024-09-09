@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/cloudevents/sdk-go/v2/event"
+	"github.com/linkifysoft/ebrick/config"
 	"github.com/linkifysoft/ebrick/logger"
 	"github.com/nats-io/nats.go"
 	"go.opentelemetry.io/otel"
@@ -94,7 +95,13 @@ func (n *natsJetStream) Publish(ctx context.Context, ev event.Event) error {
 		return err
 	}
 	headers := nats.Header{}
-	otel.GetTextMapPropagator().Inject(ctx, propagation.HeaderCarrier(headers))
+
+	// Check if tracing is enabled
+	cfg := config.GetConfig().Observability
+	if cfg.Tracing.Enable {
+		otel.GetTextMapPropagator().Inject(ctx, propagation.HeaderCarrier(headers))
+	}
+
 	_, err = n.js.PublishMsg(&nats.Msg{
 		Subject: ev.Type(),
 		Data:    data,
@@ -110,8 +117,14 @@ func (n *natsJetStream) Subscribe(subject, group string, handler func(ev *event.
 		return errors.New("group cannot be empty")
 	} else {
 		sub, err := n.js.QueueSubscribe(subject, group, func(msg *nats.Msg) {
-			// Extract context with tracing propagation
-			ctx := otel.GetTextMapPropagator().Extract(context.Background(), propagation.HeaderCarrier(msg.Header))
+
+			ctx := context.Background()
+
+			// Check if tracing is enabled
+			cfg := config.GetConfig().Observability
+			if cfg.Tracing.Enable {
+				ctx = otel.GetTextMapPropagator().Extract(ctx, propagation.HeaderCarrier(msg.Header))
+			}
 
 			var ev event.Event
 			if err := ev.UnmarshalJSON(msg.Data); err != nil {

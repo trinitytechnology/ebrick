@@ -33,7 +33,7 @@ func (p *EnvironmentModule) Initialize(opt *module.Options) error {
 	setupRoutes(handler, opt.Router)
 
 	// setup stream
-	configureConsumers(opt.EventStream)
+	configureConsumers(opt.EventStream, svc)
 
 	log.Info("Environment Module Initialized")
 	return nil

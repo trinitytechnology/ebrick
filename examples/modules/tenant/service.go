@@ -29,14 +29,14 @@ func (t *tenantService) CreateTenant(ctx context.Context, tent Tenant) (*Tenant,
 		return nil, err
 	}
 
-	t.PublishEvent(ctx, createdTenant)
+	t.PostProccess(ctx, createdTenant)
 	return createdTenant, nil
 }
 
-func (t *tenantService) PublishEvent(ctx context.Context, tent *Tenant) error {
+func (t *tenantService) PostProccess(ctx context.Context, tent *Tenant) error {
 
 	tracer := otel.Tracer("tenant")
-	_, span := tracer.Start(ctx, "Send Tenant Created Event")
+	ctx, span := tracer.Start(ctx, "Send Tenant Created Event")
 	span.SetAttributes(attribute.String("tenant.id", tent.ID.String()), attribute.String("module", "tenant"))
 
 	defer span.End()

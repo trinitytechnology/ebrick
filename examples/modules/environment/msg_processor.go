@@ -21,7 +21,7 @@ type Tenant struct {
 }
 
 // configureConsumers sets up the consumers for the CloudEventStream to process incoming events.
-func configureConsumers(stream messaging.CloudEventStream) {
+func configureConsumers(stream messaging.CloudEventStream, service EnvironmentService) {
 
 	serviceName := "environment"
 	// Start a new goroutine to handle the subscription
@@ -41,7 +41,7 @@ func configureConsumers(stream messaging.CloudEventStream) {
 
 			// Extract the tracing context and start a new span
 			tracer := otel.Tracer(serviceName)
-			_, span := tracer.Start(ctx, "Process Tenant Created Event")
+			ctx, span := tracer.Start(ctx, "Process Tenant Created Event")
 			span.SetAttributes(attribute.String("subject", ev.Type()), attribute.String("source", ev.Source()), attribute.String("module", "environment"))
 			defer span.End()
 
@@ -54,10 +54,26 @@ func configureConsumers(stream messaging.CloudEventStream) {
 				return err
 			}
 
-			span.SetAttributes(attribute.String("tenant_id", tent.ID.String()))
-			log.Info("Tenant created", zap.String("tenant_id", tent.ID.String()), zap.String("tenant_name", tent.Name))
-			span.SetStatus(codes.Ok, "Tenant created")
+			// Create a new environment for the tenant
+			env := Environment{
+				TenantAuditEntity: entity.TenantAuditEntity{
+					TenantId: tent.ID,
+				},
+				Name: tent.Name,
+			}
+
+			createdEnv, err := service.CreateEnvironment(ctx, env)
+			if err != nil {
+				log.Error("Environment creation failed", zap.String("tenant_id", tent.ID.String()))
+				span.SetStatus(codes.Error, "Environment creation failed")
+				return err
+			}
+
+			span.SetAttributes(attribute.String("tenant_id", tent.ID.String()), attribute.String("env_id", createdEnv.ID.String()), attribute.String("env_name", createdEnv.Name))
+			span.SetStatus(codes.Ok, "Environment created successfully")
+			log.Info("Environment created successfully", zap.String("tenant_id", tent.ID.String()), zap.String("env_id", createdEnv.ID.String()), zap.String("env_name", createdEnv.Name))
 			return nil
+
 		})
 
 		if err != nil {

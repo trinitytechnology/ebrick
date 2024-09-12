@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/trinitytechnology/ebrick"
-	"github.com/trinitytechnology/ebrick/examples/modules/environment"
-	"github.com/trinitytechnology/ebrick/examples/modules/tenant"
+	"github.com/trinitytechnology/ebrick/examples/internal/environment"
+	"github.com/trinitytechnology/ebrick/examples/internal/tenant"
 )
 
 func main() {

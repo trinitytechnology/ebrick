@@ -9,9 +9,8 @@ import (
 )
 
 type App interface {
-	Project() string
-	Name() string
-	Version() string
+	GetName() string
+	GetVersion() string
 	Options() *Options
 	RegisterModules(m ...module.Module) error
 	Start() error
@@ -23,18 +22,13 @@ type application struct {
 }
 
 // Version implements App.
-func (a *application) Version() string {
+func (a *application) GetVersion() string {
 	return a.opts.Version
 }
 
-// Project implements App.
-func (a *application) Project() string {
-	return a.opts.ProjectName
-}
-
 // Name implements App.
-func (a *application) Name() string {
-	return a.opts.ServiceName
+func (a *application) GetName() string {
+	return a.opts.Name
 }
 
 // Options implements App.

@@ -14,10 +14,8 @@ import (
 )
 
 type Options struct {
-	ProjectName string
-	ServiceName string
-	Version     string
-
+	Name           string
+	Version        string
 	Database       *gorm.DB
 	Cache          cache.Cache
 	EventStream    messaging.CloudEventStream
@@ -32,8 +30,7 @@ func newOptions(opts ...Option) *Options {
 	serviceCfg := config.GetConfig().Service
 
 	opt := &Options{
-		ProjectName:    serviceCfg.Project,
-		ServiceName:    serviceCfg.Name,
+		Name:           serviceCfg.Name,
 		Version:        serviceCfg.Version,
 		Database:       database.DefaultDataSource,
 		Cache:          cache.DefaultCache,
@@ -50,20 +47,14 @@ func newOptions(opts ...Option) *Options {
 	return opt
 }
 
-func Version(version string) Option {
+func GetVersion(version string) Option {
 	return func(o *Options) {
 		o.Version = version
 	}
 }
 
-func ProjectName(projectName string) Option {
+func GetName(name string) Option {
 	return func(o *Options) {
-		o.ProjectName = projectName
-	}
-}
-
-func ServiceName(serviceName string) Option {
-	return func(o *Options) {
-		o.ServiceName = serviceName
+		o.Name = name
 	}
 }

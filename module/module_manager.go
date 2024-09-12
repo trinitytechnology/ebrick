@@ -3,6 +3,7 @@ package module
 import (
 	"plugin"
 
+	"github.com/trinitytechnology/ebrick/config"
 	"github.com/trinitytechnology/ebrick/utils"
 	"go.uber.org/zap"
 )
@@ -30,6 +31,25 @@ func (mm *ModuleManager) RegisterModule(m Module) error {
 	mm.modules[m.Id()] = m
 	log.Info("Module registered", zap.String("id", m.Id()), zap.String("name", m.Name()), zap.String("version", m.Version()))
 	return nil
+}
+
+func (mm *ModuleManager) LoadDynamicModules() {
+	log := mm.options.Logger
+	log.Info("Loading dynamic modules")
+	modules := config.GetConfig().Modules
+	for _, module := range modules {
+		if module.Enable {
+			if module.Id == "" {
+				log.Error("Module id is required", zap.String("name", module.Name))
+				continue
+			}
+			err := mm.RegisterModuleById(module.Id)
+			if err != nil {
+				log.Error("Failed to load module", zap.String("id", module.Id), zap.String("name", module.Name), zap.Error(err))
+			}
+		}
+
+	}
 }
 
 func (mm *ModuleManager) RegisterModuleById(moduleId string) error {

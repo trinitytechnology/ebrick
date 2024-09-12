@@ -32,6 +32,10 @@ messaging:
     user:
     password:
 
+modules:
+    - id: customer
+      enable: true
+
 observability:
     tracing:
         enable: true

@@ -16,6 +16,14 @@ docker compose -f ./docker/docker-compose-infra.yml up -d
 docker compose -f ./docker/docker-compose-observability.yml up -d
 ```
 
+## build dynamic modules(optional)
+
+```bash
+./build-ext-modules.sh
+---------
+output cmd/mono/modules
+```
+
 ## Running the monolithic application
 
 ```bash

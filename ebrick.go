@@ -64,7 +64,7 @@ func (a *application) Start() error {
 			log.Fatal("failed to shutdown tracer provider", zap.Error(err))
 		}
 	}()
-
+	a.mm.LoadDynamicModules()
 	err := a.opts.HttpServer.Start()
 
 	return err

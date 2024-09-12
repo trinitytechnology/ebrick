@@ -29,6 +29,7 @@ type Config struct {
 	Messaging     MessagingConfig
 	Logger        LoggerConfig
 	Observability ObservabilityConfig
+	Modules       []ModuleConfig
 }
 
 // ServiceConfig represents the service configuration.
@@ -111,6 +112,12 @@ type LoggerConfig struct {
 	Enable   bool
 	Type     string
 	Endpoint string
+}
+
+type ModuleConfig struct {
+	Id     string
+	Name   string
+	Enable bool
 }
 
 // LoadConfig loads the configuration from the specified paths.

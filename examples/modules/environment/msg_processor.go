@@ -20,7 +20,7 @@ type Tenant struct {
 }
 
 // configureConsumers sets up the consumers for the CloudEventStream to process incoming events.
-func configureConsumers(stream messaging.CloudEventStream, service EnvironmentService) {
+func configureConsumers(stream messaging.CloudEventStream, service EnvironmentService, log *zap.Logger) {
 
 	serviceName := Module.Name()
 	subject := "tenant.created"

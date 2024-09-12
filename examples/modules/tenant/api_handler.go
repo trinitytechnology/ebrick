@@ -13,11 +13,13 @@ type TenantHandler interface {
 
 type tenantHandler struct {
 	service TenantService
+	log     *zap.Logger
 }
 
-func NewTenantHandler(service TenantService) TenantHandler {
+func NewTenantHandler(service TenantService, log *zap.Logger) TenantHandler {
 	return &tenantHandler{
 		service: service,
+		log:     log,
 	}
 }
 
@@ -32,7 +34,7 @@ func (t *tenantHandler) CreateTenant(c *gin.Context) {
 		return
 	}
 	ten := Tenant{Name: request.Name}
-	log.Info("Creating Tenant", zap.String("name", ten.Name))
+	t.log.Info("Creating Tenant", zap.String("name", ten.Name))
 	t.service.CreateTenant(c.Request.Context(), ten)
 	c.JSON(http.StatusOK, gin.H{"message": "Tenant Created"})
 }

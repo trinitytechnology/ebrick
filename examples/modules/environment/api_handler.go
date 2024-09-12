@@ -13,16 +13,18 @@ type EnvironmentHandler interface {
 
 type envHandler struct {
 	service EnvironmentService
+	log     *zap.Logger
 }
 
-func NewEnvironmentHandler(service EnvironmentService) EnvironmentHandler {
+func NewEnvironmentHandler(service EnvironmentService, log *zap.Logger) EnvironmentHandler {
 	return &envHandler{
 		service: service,
+		log:     log,
 	}
 }
 
 // CreateEnvironment implements EnvironmentHandler.
-func (t *envHandler) CreateEnvironment(c *gin.Context) {
+func (h *envHandler) CreateEnvironment(c *gin.Context) {
 	var request struct {
 		Name string `json:"name" binding:"required"`
 	}
@@ -33,7 +35,7 @@ func (t *envHandler) CreateEnvironment(c *gin.Context) {
 	}
 
 	ten := Environment{Name: request.Name}
-	log.Info("Creating Environment", zap.String("name", ten.Name))
-	t.service.CreateEnvironment(c.Request.Context(), ten)
+	h.log.Info("Creating Environment", zap.String("name", ten.Name))
+	h.service.CreateEnvironment(c.Request.Context(), ten)
 	c.JSON(http.StatusOK, gin.H{"message": "Environment Created"})
 }

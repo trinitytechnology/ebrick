@@ -2,10 +2,7 @@ package environment
 
 import (
 	"github.com/trinitytechnology/ebrick/module"
-	"go.uber.org/zap"
 )
-
-var log *zap.Logger
 
 type EnvironmentModule struct {
 }
@@ -13,7 +10,7 @@ type EnvironmentModule struct {
 // Install implements plugin.Plugin.
 func (p *EnvironmentModule) Initialize(opt *module.Options) error {
 	// Init Tables
-	log = opt.Logger
+	log := opt.Logger
 
 	log.Info("Initializing Environment Module")
 
@@ -24,16 +21,16 @@ func (p *EnvironmentModule) Initialize(opt *module.Options) error {
 	repo := NewRepository(opt.Database)
 
 	// Init Service
-	svc := NewEnvironmentService(repo)
+	svc := NewEnvironmentService(repo, opt.Logger)
 
 	// Init Handler
-	handler := NewEnvironmentHandler(svc)
+	handler := NewEnvironmentHandler(svc, opt.Logger)
 
 	// setup routes
 	setupRoutes(handler, opt.Router)
 
 	// setup stream
-	configureConsumers(opt.EventStream, svc)
+	configureConsumers(opt.EventStream, svc, opt.Logger)
 
 	log.Info("Environment Module Initialized")
 	return nil

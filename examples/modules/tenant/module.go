@@ -8,12 +8,10 @@ import (
 type TenantModule struct {
 }
 
-var log *zap.Logger
-
 // Install implements plugin.Plugin.
 func (p *TenantModule) Initialize(opt *module.Options) error {
 	// Init Tables
-	log = opt.Logger
+	log := opt.Logger
 	log.Info("Initializing Tenant Module")
 
 	// Migrate Tables
@@ -23,10 +21,10 @@ func (p *TenantModule) Initialize(opt *module.Options) error {
 	repo := NewRepository(opt.Database)
 
 	// Init Service
-	svc := NewTenantService(repo, opt.EventStream)
+	svc := NewTenantService(repo, opt.EventStream, opt.Logger)
 
 	// Init Handler
-	handler := NewTenantHandler(svc)
+	handler := NewTenantHandler(svc, opt.Logger)
 
 	// setup routes
 	setupApiRoutes(handler, opt.Router)

@@ -17,6 +17,7 @@ type TenantService interface {
 type tenantService struct {
 	repo TenantRepository
 	ces  messaging.CloudEventStream
+	log  *zap.Logger
 }
 
 // CreateTenant implements TenantService.
@@ -49,15 +50,16 @@ func (t *tenantService) PostProccess(ctx context.Context, tent *Tenant) error {
 
 	// Publish a CloudEvent
 	if err := t.ces.Publish(ctx, ce); err != nil {
-		log.Error("Error publishing CloudEvent", zap.Error(err))
+		t.log.Error("Error publishing CloudEvent", zap.Error(err))
 		return err
 	}
 	return nil
 }
 
-func NewTenantService(repo TenantRepository, eventStream messaging.CloudEventStream) TenantService {
+func NewTenantService(repo TenantRepository, eventStream messaging.CloudEventStream, log *zap.Logger) TenantService {
 	return &tenantService{
 		repo: repo,
 		ces:  eventStream,
+		log:  log,
 	}
 }

@@ -4,8 +4,8 @@ import (
 	"errors"
 	"plugin"
 
-	"github.com/linkifysoft/ebrick/logger"
-	"github.com/linkifysoft/ebrick/utils"
+	"github.com/trinitytechnology/ebrick/logger"
+	"github.com/trinitytechnology/ebrick/utils"
 	"go.uber.org/zap"
 )
 

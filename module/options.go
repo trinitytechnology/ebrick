@@ -2,8 +2,8 @@ package module
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/linkifysoft/ebrick/cache"
-	"github.com/linkifysoft/ebrick/messaging"
+	"github.com/trinitytechnology/ebrick/cache"
+	"github.com/trinitytechnology/ebrick/messaging"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )

@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/linkifysoft/ebrick/config"
-	"github.com/linkifysoft/ebrick/logger"
+	"github.com/trinitytechnology/ebrick/config"
+	"github.com/trinitytechnology/ebrick/logger"
 	"go.uber.org/zap"
 )
 

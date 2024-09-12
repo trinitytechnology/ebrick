@@ -3,8 +3,8 @@ package observability
 import (
 	"context"
 
-	"github.com/linkifysoft/ebrick/config"
-	"github.com/linkifysoft/ebrick/logger"
+	"github.com/trinitytechnology/ebrick/config"
+	"github.com/trinitytechnology/ebrick/logger"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
 )

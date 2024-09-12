@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/linkifysoft/ebrick/module"
+	"github.com/trinitytechnology/ebrick/module"
 	"go.uber.org/zap"
 )
 

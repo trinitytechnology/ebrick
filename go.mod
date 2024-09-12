@@ -1,4 +1,4 @@
-module github.com/linkifysoft/ebrick
+module github.com/trinitytechnology/ebrick
 
 go 1.22.5
 
@@ -90,6 +90,6 @@ require (
 )
 
 replace (
-	github.com/linkifysoft/ebrick/config => ./config
-	github.com/linkifysoft/ebrick/logger => ./logger
+	github.com/trinitytechnology/ebrick/config => ./config
+	github.com/trinitytechnology/ebrick/logger => ./logger
 )

@@ -3,7 +3,7 @@ package logger
 import (
 	"log"
 
-	"github.com/linkifysoft/ebrick/config"
+	"github.com/trinitytechnology/ebrick/config"
 	"go.uber.org/zap"
 )
 

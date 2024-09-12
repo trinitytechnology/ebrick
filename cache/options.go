@@ -3,7 +3,7 @@ package cache
 import (
 	"time"
 
-	"github.com/linkifysoft/ebrick/config"
+	"github.com/trinitytechnology/ebrick/config"
 )
 
 // Option represents a store option function.

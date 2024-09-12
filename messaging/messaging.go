@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/cloudevents/sdk-go/v2/event"
-	"github.com/linkifysoft/ebrick/config"
+	"github.com/trinitytechnology/ebrick/config"
 )
 
 var (

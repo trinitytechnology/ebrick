@@ -2,10 +2,10 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/linkifysoft/ebrick/config"
-	"github.com/linkifysoft/ebrick/logger"
-	"github.com/linkifysoft/ebrick/observability"
-	"github.com/linkifysoft/ebrick/web"
+	"github.com/trinitytechnology/ebrick/config"
+	"github.com/trinitytechnology/ebrick/logger"
+	"github.com/trinitytechnology/ebrick/observability"
+	"github.com/trinitytechnology/ebrick/web"
 	"go.uber.org/zap"
 )
 

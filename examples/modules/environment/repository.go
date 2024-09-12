@@ -1,7 +1,7 @@
 package environment
 
 import (
-	"github.com/linkifysoft/ebrick/repository"
+	"github.com/trinitytechnology/ebrick/repository"
 	"gorm.io/gorm"
 )
 

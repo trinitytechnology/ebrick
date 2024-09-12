@@ -1,7 +1,7 @@
 package observability
 
 import (
-	"github.com/linkifysoft/ebrick/config"
+	"github.com/trinitytechnology/ebrick/config"
 	"go.opentelemetry.io/otel/sdk/trace"
 	"go.uber.org/zap"
 )

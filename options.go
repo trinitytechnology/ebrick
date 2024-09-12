@@ -1,13 +1,13 @@
 package ebrick
 
 import (
-	"github.com/linkifysoft/ebrick/cache"
-	"github.com/linkifysoft/ebrick/config"
-	"github.com/linkifysoft/ebrick/database"
-	"github.com/linkifysoft/ebrick/logger"
-	"github.com/linkifysoft/ebrick/messaging"
-	"github.com/linkifysoft/ebrick/observability"
-	"github.com/linkifysoft/ebrick/server"
+	"github.com/trinitytechnology/ebrick/cache"
+	"github.com/trinitytechnology/ebrick/config"
+	"github.com/trinitytechnology/ebrick/database"
+	"github.com/trinitytechnology/ebrick/logger"
+	"github.com/trinitytechnology/ebrick/messaging"
+	"github.com/trinitytechnology/ebrick/observability"
+	"github.com/trinitytechnology/ebrick/server"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	"go.uber.org/zap"
 	"gorm.io/gorm"

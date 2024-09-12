@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/cloudevents/sdk-go/v2/event"
-	"github.com/linkifysoft/ebrick/config"
-	"github.com/linkifysoft/ebrick/logger"
 	"github.com/nats-io/nats.go"
+	"github.com/trinitytechnology/ebrick/config"
+	"github.com/trinitytechnology/ebrick/logger"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/propagation"
 	"go.uber.org/zap"

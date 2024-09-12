@@ -1,6 +1,6 @@
 package environment
 
-import "github.com/linkifysoft/ebrick/entity"
+import "github.com/trinitytechnology/ebrick/entity"
 
 type Environment struct {
 	entity.TenantAuditEntity

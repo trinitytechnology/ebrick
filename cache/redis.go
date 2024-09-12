@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/linkifysoft/ebrick/logger"
 	"github.com/redis/rueidis"
 	"github.com/redis/rueidis/rueidiscompat"
+	"github.com/trinitytechnology/ebrick/logger"
 	"go.uber.org/zap"
 )
 

@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/cloudevents/sdk-go/v2/event"
-	"github.com/linkifysoft/ebrick/logger"
-	"github.com/linkifysoft/ebrick/messaging"
+	"github.com/trinitytechnology/ebrick/logger"
+	"github.com/trinitytechnology/ebrick/messaging"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.uber.org/zap"

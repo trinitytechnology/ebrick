@@ -3,7 +3,7 @@ package environment
 import (
 	"context"
 
-	"github.com/linkifysoft/ebrick/observability"
+	"github.com/trinitytechnology/ebrick/observability"
 	"go.opentelemetry.io/otel/attribute"
 	"go.uber.org/zap"
 )

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/linkifysoft/ebrick/config"
-	"github.com/linkifysoft/ebrick/database/postgresql"
-	"github.com/linkifysoft/ebrick/logger"
+	"github.com/trinitytechnology/ebrick/config"
+	"github.com/trinitytechnology/ebrick/database/postgresql"
+	"github.com/trinitytechnology/ebrick/logger"
 	"gorm.io/gorm"
 )
 

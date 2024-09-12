@@ -1,7 +1,7 @@
 package messaging
 
 import (
-	"github.com/linkifysoft/ebrick/config"
+	"github.com/trinitytechnology/ebrick/config"
 )
 
 type Options struct {

@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/cloudevents/sdk-go/v2/event"
-	"github.com/linkifysoft/ebrick/config"
-	"github.com/linkifysoft/ebrick/logger"
+	"github.com/trinitytechnology/ebrick/config"
+	"github.com/trinitytechnology/ebrick/logger"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"

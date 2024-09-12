@@ -1,6 +1,6 @@
 package tenant
 
-import "github.com/linkifysoft/ebrick/entity"
+import "github.com/trinitytechnology/ebrick/entity"
 
 type Tenant struct {
 	entity.AuditEntity

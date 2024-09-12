@@ -5,7 +5,7 @@
 ## Key Feature: Seamless Transition Between Architectures
 
 One of the standout features of eBrick is its ability to support seamless transitions between monolithic and microservices architectures. You can start by building a monolithic application where all modules are integrated into a single, unified system. As your application grows, eBrick’s plug-and-play capability allows you to effortlessly transition to a microservices architecture, where each service contains one or more modules. If needed, you can just as easily transition back to a monolithic architecture, reintegrating the services into a single application. This flexibility ensures your application can evolve with your business needs, scaling up, breaking down, or consolidating as necessary—all without extensive rewrites or disruptions.
-
+![Architecture](docs/images/architecture.png)
 ## Additionally, eBrick comes with out-of-the-box support for
 
 - **Observability with OpenTelemetry**: Seamlessly monitor and trace your applications to ensure optimal performance and reliability.

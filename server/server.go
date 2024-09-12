@@ -26,7 +26,7 @@ func (h *httpServer) GetRouter() *gin.Engine {
 // Start implements HttpServer.
 func (h *httpServer) Start() error {
 	// Start the Gin server
-	h.opts.Logger.Info("Starting HTTP Server")
+	h.opts.Logger.Info(fmt.Sprintf("Starting HTTP Server: %d", h.opts.Port))
 	if err := h.opts.Router.Run(fmt.Sprintf(":%d", h.opts.Port)); err != nil {
 		h.opts.Logger.Fatal("Failed to start Gin server", zap.Error(err))
 	}

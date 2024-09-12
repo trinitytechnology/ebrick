@@ -20,13 +20,20 @@ var (
 	ErrModuleNotFound     = errors.New("Module not found")
 )
 
-type Module interface {
-	// Properties
+type Initializer interface {
+	Initialize(options *Options) error
+}
+
+type MetaDataProvider interface {
 	Id() string
 	Name() string
 	Version() string
 	Description() string
-	Initialize(options *Options) error
+}
+
+type Module interface {
+	Initializer
+	MetaDataProvider
 }
 
 type ModuleManager struct {

@@ -18,7 +18,7 @@ type AppConfig struct {
 	Version       string   `yaml:"version"`
 }
 
-var EBrickVersion = "v0.2.1"
+var EBrickVersion = "v0.3.0"
 
 // NewApp creates a new eBrick application
 func NewApp() {

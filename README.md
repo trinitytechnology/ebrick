@@ -6,6 +6,7 @@
 
 One of the standout features of eBrick is its ability to support seamless transitions between monolithic and microservices architectures. You can start by building a monolithic application where all modules are integrated into a single, unified system. As your application grows, eBrick’s plug-and-play capability allows you to effortlessly transition to a microservices architecture, where each service contains one or more modules. If needed, you can just as easily transition back to a monolithic architecture, reintegrating the services into a single application. This flexibility ensures your application can evolve with your business needs, scaling up, breaking down, or consolidating as necessary—all without extensive rewrites or disruptions.
 ![Architecture](docs/images/architecture.png)
+
 ## Additionally, eBrick comes with out-of-the-box support for
 
 - **Observability with OpenTelemetry**: Seamlessly monitor and trace your applications to ensure optimal performance and reliability.
@@ -15,3 +16,23 @@ One of the standout features of eBrick is its ability to support seamless transi
 - **Multi-Tenancy**: Support multiple tenants within a single application instance, ensuring isolated and secure data handling for each tenant.
 
 With eBrick, you’re equipped to build highly resilient, flexible, and observable applications that can easily adapt to your changing requirements, making it the ideal framework for dynamic and growing environments.
+
+## Install eBrick cli tool
+
+### For Local Development
+
+```bash
+go install github.com/trinitytechnology/ebrick/cli/cmd/ebrick@latest
+```
+
+### (Local Development)
+
+```bash
+go install ./cli/cmd/ebrick
+```
+
+### Create new application
+
+```bash
+ebrick new app
+```

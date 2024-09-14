@@ -18,6 +18,8 @@ type AppConfig struct {
 	Version       string   `yaml:"version"`
 }
 
+var EBrickVersion = "v0.2.1"
+
 // NewApp creates a new eBrick application
 func NewApp() {
 	appName := utils.GetUserInput("Enter the name of the application: ", true, "Application name is required.")
@@ -38,7 +40,7 @@ func NewApp() {
 		Observability: observability,
 		Cache:         cache,
 		Messaging:     messaging,
-		Version:       "latest",
+		Version:       EBrickVersion,
 	}
 
 	fmt.Println("Creating a new eBrick application with the name:", appName)
@@ -56,4 +58,26 @@ func NewApp() {
 	}
 
 	GenerateApplication(ebrickConfig)
+
+	fmt.Println("Application created successfully.")
+
+	// Execute post generation tasks
+	PostGenerated()
+}
+
+func RunApp() {
+	// Run go mod tidy
+	utils.ExecCommand("go", "mod", "tidy")
+
+	// Run go mod tidy
+	utils.ExecCommand("go", "run", "cmd/main.go")
+}
+
+func PostGenerated() {
+
+	fmt.Println("Running post generation tasks...")
+
+	// Run go mod tidy
+	utils.ExecCommand("go", "mod", "tidy")
+
 }

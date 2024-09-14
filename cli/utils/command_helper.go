@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"slices"
 	"strings"
 )
@@ -59,4 +60,13 @@ func ProcessSlicesInput(input string) []string {
 	modules := strings.Split(strings.ReplaceAll(input, " ", ""), ",")
 	slices.Sort(modules)
 	return slices.Compact(modules)
+}
+
+func ExecCommand(name string, args ...string) error {
+
+	fmt.Println("Running command:", name, strings.Join(args, " "))
+	cmd := exec.Command(name, args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
 }

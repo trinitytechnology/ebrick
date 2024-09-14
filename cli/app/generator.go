@@ -28,6 +28,9 @@ var grafanaPrometheusTemplate string
 //go:embed templates/observability/grafana/datasource.yml.tmpl
 var grafanaDatasourceTemplate string
 
+//go:embed templates/Dockerfile.tmpl
+var dockerfileTemplate string
+
 var files = map[string]string{}
 
 func GenerateApplication(ebrickConfig AppConfig) {
@@ -38,6 +41,7 @@ func GenerateApplication(ebrickConfig AppConfig) {
 	files["docker-compose.yml"] = dockerComposeTemplate
 	files["go.mod"] = goModTemplate
 	files["README.md"] = readmeTemplate
+	files["Dockerfile"] = dockerfileTemplate
 
 	if ebrickConfig.Observability {
 		files["observability/prometheus/prometheus.yml"] = grafanaPrometheusTemplate

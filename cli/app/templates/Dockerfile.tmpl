@@ -11,7 +11,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o app ./examples
+RUN go build -o app ./cmd
 
 # Start a new stage from scratch for a smaller final image.
 FROM alpine:3.20

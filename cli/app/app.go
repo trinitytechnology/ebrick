@@ -20,8 +20,45 @@ type AppConfig struct {
 
 var EBrickVersion = "v0.3.2"
 
+const appManifest = ".ebrick.yaml"
+
 // NewApp creates a new eBrick application
 func NewApp() {
+
+	var appConfig AppConfig
+
+	// Check .ebrick.yaml file exists
+	if !utils.FileExists(appManifest) {
+		appConfig = NewApplicationCommandPrompts()
+		err := utils.WriteYamlFile(appManifest, appConfig)
+		if err != nil {
+			os.Exit(1)
+		}
+	} else {
+		overwrite := utils.GetYesOrNoInput("Overwrite existing configuration?", true)
+		if !overwrite {
+			return
+		}
+	}
+
+	// Read .ebrick.yaml
+	appConfig, err := utils.ReadYamlFile[AppConfig](appManifest)
+	if err != nil {
+		fmt.Println("Error reading .ebrick.yaml:", err)
+		return
+	}
+
+	fmt.Println("Creating a new eBrick application with the name:", appConfig.Name)
+	GenerateApplication(appConfig)
+
+	fmt.Println("Application created successfully.")
+
+	// Execute post generation tasks
+	PostGenerated()
+}
+
+func NewApplicationCommandPrompts() AppConfig {
+
 	appName := utils.GetUserInput("Enter the name of the application: ", true, "Application name is required.")
 	packageName := utils.GetUserInput("Enter the application package: ", true, "Package name is required.")
 	modulesInput := utils.GetUserInput("Enter the application modules (comma-separated, no spaces): ", false, "")
@@ -43,26 +80,7 @@ func NewApp() {
 		Version:       EBrickVersion,
 	}
 
-	fmt.Println("Creating a new eBrick application with the name:", appName)
-	err := utils.WriteYamlFile(".ebrick.yaml", appConfig)
-
-	if err != nil {
-		os.Exit(1)
-	}
-
-	// Read .ebrick.yaml
-	ebrickConfig, err := utils.ReadYamlFile[AppConfig](".ebrick.yaml")
-	if err != nil {
-		fmt.Println("Error reading .ebrick.yaml:", err)
-		return
-	}
-
-	GenerateApplication(ebrickConfig)
-
-	fmt.Println("Application created successfully.")
-
-	// Execute post generation tasks
-	PostGenerated()
+	return appConfig
 }
 
 func RunApp() {

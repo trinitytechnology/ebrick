@@ -62,6 +62,12 @@ func CreateFile(filePath string) (*os.File, error) {
 	return file, nil
 }
 
+// FileExists checks if a file exists
+func FileExists(filePath string) bool {
+	_, err := os.Stat(filePath)
+	return !os.IsNotExist(err)
+}
+
 func CreateFolder(folderPath string) error {
 	// Create parent directories if they don't exist
 	err := os.MkdirAll(folderPath, os.ModePerm)

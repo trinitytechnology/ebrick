@@ -1,11 +1,20 @@
 package main
 
 import (
+	_ "embed"
+	"fmt"
+
 	"github.com/spf13/cobra"
 	"github.com/trinitytechnology/ebrick/cli/app"
 )
 
+//go:embed banner.txt
+var banner string
+
 func main() {
+	// Print the banner with colors
+	fmt.Println(banner)
+
 	var rootCmd = &cobra.Command{
 		Use: "ebrick",
 	}

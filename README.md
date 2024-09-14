@@ -19,8 +19,6 @@ With eBrick, you’re equipped to build highly resilient, flexible, and observab
 
 ## Install eBrick cli tool
 
-### For Local Development
-
 ```bash
 go install github.com/trinitytechnology/ebrick/cli/cmd/ebrick@latest
 ```

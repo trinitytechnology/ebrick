@@ -20,6 +20,7 @@ With eBrick, you’re equipped to build highly resilient, flexible, and observab
 ## Install eBrick cli tool
 
 ```bash
+export GOPRIVATE=github.com/trinitytechnology/ebrick
 go install github.com/trinitytechnology/ebrick/cli/cmd/ebrick@latest
 ```
 

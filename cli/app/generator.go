@@ -33,9 +33,20 @@ func GenerateApplication(ebrickConfig AppConfig) {
 	files["go.mod"] = goModTemplate
 	files["README.md"] = readmeTemplate
 
+	// Create the necessary folders
+	CreateFolders()
+
 	// Generate the application.yaml file
 	GenerateFiles(ebrickConfig)
 
+}
+
+func CreateFolders() {
+	fmt.Println("Creating the necessary folders...")
+	utils.CreateFolder("./cmd")
+	utils.CreateFolder("./modules")
+	utils.CreateFolder("./internal")
+	utils.CreateFolder("./pkg")
 }
 
 func GenerateFiles(appConfig AppConfig) {

@@ -3,7 +3,6 @@ package utils
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"gopkg.in/yaml.v2"
 )
@@ -48,10 +47,7 @@ func WriteYamlFile[T any](filePath string, data T) error {
 
 func CreateFile(filePath string) (*os.File, error) {
 	// Create parent directories if they don't exist
-	err := os.MkdirAll(filepath.Dir(filePath), os.ModePerm)
-	if err != nil {
-		return nil, fmt.Errorf("error creating directories for %s: %w", filePath, err)
-	}
+	CreateFolder(filePath)
 
 	// Create the file
 	file, err := os.Create(filePath)
@@ -60,4 +56,13 @@ func CreateFile(filePath string) (*os.File, error) {
 	}
 
 	return file, nil
+}
+
+func CreateFolder(folderPath string) error {
+	// Create the directory and all necessary parent directories
+	err := os.MkdirAll(folderPath, os.ModePerm)
+	if err != nil {
+		return fmt.Errorf("error creating directory %s: %w", folderPath, err)
+	}
+	return nil
 }

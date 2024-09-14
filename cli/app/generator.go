@@ -22,6 +22,12 @@ var goModTemplate string
 //go:embed templates/README.md.tmpl
 var readmeTemplate string
 
+//go:embed templates/observability/prometheus/prometheus.yml.tmpl
+var grafanaPrometheusTemplate string
+
+//go:embed templates/observability/grafana/datasource.yml.tmpl
+var grafanaDatasourceTemplate string
+
 var files = map[string]string{}
 
 func GenerateApplication(ebrickConfig AppConfig) {
@@ -33,6 +39,10 @@ func GenerateApplication(ebrickConfig AppConfig) {
 	files["go.mod"] = goModTemplate
 	files["README.md"] = readmeTemplate
 
+	if ebrickConfig.Observability {
+		files["observability/prometheus/prometheus.yml"] = grafanaPrometheusTemplate
+		files["observability/grafana/datasource.yml"] = grafanaDatasourceTemplate
+	}
 	// Create the necessary folders
 	CreateFolders()
 
@@ -43,10 +53,10 @@ func GenerateApplication(ebrickConfig AppConfig) {
 
 func CreateFolders() {
 	fmt.Println("Creating the necessary folders...")
-	utils.CreateFolder("./cmd")
-	utils.CreateFolder("./modules")
-	utils.CreateFolder("./internal")
-	utils.CreateFolder("./pkg")
+	utils.CreateFolder("cmd")
+	utils.CreateFolder("modules")
+	utils.CreateFolder("internal")
+	utils.CreateFolder("pkg")
 }
 
 func GenerateFiles(appConfig AppConfig) {

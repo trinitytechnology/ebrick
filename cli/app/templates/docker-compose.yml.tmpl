@@ -94,8 +94,6 @@ services:
       - "3000:3000"
     volumes:
       - ./observability/grafana/:/etc/grafana/provisioning/datasources
-      - ./observability/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
-      - ./observability/dashboards:/etc/grafana/dashboards
     depends_on:
       - loki
       - prometheus

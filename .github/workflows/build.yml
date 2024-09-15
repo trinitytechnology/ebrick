@@ -1,0 +1,50 @@
+name: Build eBrick
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**/*.go'       # Go source files
+      - '**/*.tmpl'     # Template files
+      - '**/*.tpl'      # Template files
+      - 'go.mod'        # Dependency management file
+      - 'go.sum'        # Dependency lock file
+      - 'config/**/*.yaml'  # YAML config files
+      - 'config/**/*.yml'  # YAML config files
+      - 'config/**/*.json'  # JSON config files
+      - '.github/workflows/*'  # CI/CD workflow files
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the code
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # Set up Go environment
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.22.5'
+
+      # Cache Go modules
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      # Install dependencies
+      - name: Install dependencies
+        run: go mod download
+
+      # Run tests
+      - name: Run tests
+        run: go test -v ./...

@@ -24,24 +24,3 @@ One of the standout features of eBrick is its ability to support seamless transi
 - **Multi-Tenancy**: Support multiple tenants within a single application instance, ensuring isolated and secure data handling for each tenant.
 
 With eBrick, you’re equipped to build highly resilient, flexible, and observable applications that can easily adapt to your changing requirements, making it the ideal framework for dynamic and growing environments.
-
-## Getting Started
-
-### Install eBrick cli tool
-
-```bash
-export GOPRIVATE=github.com/trinitytechnology/ebrick
-go install github.com/trinitytechnology/ebrick/cli/cmd/ebrick@latest
-```
-
-### Install from local folder (Local Development)
-
-```bash
-go install ./cli/cmd/ebrick
-```
-
-### Create new application
-
-```bash
-ebrick new app
-```

@@ -4,7 +4,9 @@
 
 ![Elastic Architecture](docs/images/elastic-architecture.png)
 
-This architecture combines modular monolithic design, kernel architecture, and microservices to provide an elastic structure that supports rapid transformation between monolithic and microservice configurations. It starts as a modular monolith with a kernel at its core, managing business, enhancement, and extra plugins. As the system evolves, modules can be easily extracted into independent microservices or reintegrated, allowing flexibility, scalability, and seamless adaptation to changing requirements.
+Elastic Architecture is a software design approach that emphasizes flexibility, adaptability, and scalability by combining the strengths of modular monolithic, kernel, and microservice architectures. This approach allows the system to easily expand, contract, or transition between different architectural models based on business and technical requirements without significantly affecting its integrity and performance. 
+
+[Elastic Architecture](docs/Elastic-Architecture.md)
 
 ## eBrick Framework Overview
 
@@ -12,7 +14,7 @@ This architecture combines modular monolithic design, kernel architecture, and m
 
 ### Key Feature: Seamless Transition Between Architectures
 
-One of the standout features of eBrick is its ability to support seamless transitions between monolithic and microservices architectures. You can start by building a monolithic application where all modules are integrated into a single, unified system. As your application grows, eBrick’s plug-and-play capability allows you to effortlessly transition to a microservices architecture, where each service contains one or more modules. If needed, you can just as easily transition back to a monolithic architecture, reintegrating the services into a single application. This flexibility ensures your application can evolve with your business needs, scaling up, breaking down, or consolidating as necessary—all without extensive rewrites or disruptions.
+One of the standout features of eBrick is its ability to support seamless **transitions between monolithic and microservices architectures** . You can start by building a monolithic application where all modules are integrated into a single, unified system. As your application grows, eBrick’s **plug-and-play** capability allows you to effortlessly transition to a microservices architecture, where **each service contains one or more module**s. If needed, you can just as easily transition back to a monolithic architecture, reintegrating the services into a single application. This flexibility ensures your application can evolve with your business needs, scaling up, breaking down, or consolidating as necessary—all without extensive rewrites or disruptions.
 ![Architecture](docs/images/ebrick.png)
 
 ### Additionally, eBrick comes with out-of-the-box support for

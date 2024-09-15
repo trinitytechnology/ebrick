@@ -2,7 +2,9 @@
 
 ## Elastic Architecture Overview
 
-![Elastic Architecture](docs/images/elastic-architecture.png)
+<div style="text-align: center; ">
+  <img style="border-radius: 10px" src="docs/images/elastic-architecture.png" alt="Image description" width="800">
+</div>
 
 Elastic Architecture is a software design approach that emphasizes flexibility, adaptability, and scalability by combining the strengths of modular monolithic, kernel, and microservice architectures. This approach allows the system to easily expand, contract, or transition between different architectural models based on business and technical requirements without significantly affecting its integrity and performance. 
 
@@ -15,7 +17,9 @@ Elastic Architecture is a software design approach that emphasizes flexibility, 
 ### Key Feature: Seamless Transition Between Architectures
 
 One of the standout features of eBrick is its ability to support seamless **transitions between monolithic and microservices architectures** . You can start by building a monolithic application where all modules are integrated into a single, unified system. As your application grows, eBrick’s **plug-and-play** capability allows you to effortlessly transition to a microservices architecture, where **each service contains one or more module**s. If needed, you can just as easily transition back to a monolithic architecture, reintegrating the services into a single application. This flexibility ensures your application can evolve with your business needs, scaling up, breaking down, or consolidating as necessary—all without extensive rewrites or disruptions.
-![Architecture](docs/images/ebrick.png)
+<div style="text-align: center; ">
+  <img style="border-radius: 10px" src="docs/images/ebrick.png" alt="Image description" width="800">
+</div>
 
 ### Additionally, eBrick comes with out-of-the-box support for
 

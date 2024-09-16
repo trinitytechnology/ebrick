@@ -53,7 +53,7 @@ type Cache interface {
 	Invalidate(ctx context.Context, options ...InvalidateOption) error
 
 	// Clear clears the entire cache.
-	// If an error occurs, it returns the error.
+	// If an error occurs, it returns the error
 	Clear(ctx context.Context) error
 
 	// GetType returns the type of the cache.

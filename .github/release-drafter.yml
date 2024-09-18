@@ -19,7 +19,18 @@ categories:
   - title: '⚡ Performance'
     labels:
       - 'perf'
+  - title: '💥 Breaking Changes'
+    labels:
+      - 'breaking-change'
+      - 'major'
 template: |
   ## What's Changed
 
   $CHANGES
+version-resolver:
+  major:
+    labels: ['major', 'breaking-change']
+  minor:
+    labels: ['minor' , 'feat', 'enhancement']
+  patch:
+    labels: ['patch', 'bug', 'chore', 'fix', 'refactor', 'docs', 'perf']

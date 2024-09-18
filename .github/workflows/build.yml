@@ -11,9 +11,8 @@ on:
       - '**/*.tpl'      # Template files
       - 'go.mod'        # Dependency management file
       - 'go.sum'        # Dependency lock file
-      - 'config/**/*.yaml'  # YAML config files
-      - 'config/**/*.yml'  # YAML config files
-      - 'config/**/*.json'  # JSON config files
+      - '**/*.yaml'  # YAML config files
+      - '**/*.yml'   # YAML config files
       - '.github/workflows/*'  # CI/CD workflow files
 jobs:
   build:

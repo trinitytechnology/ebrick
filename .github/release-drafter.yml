@@ -19,7 +19,6 @@ categories:
   - title: '⚡ Performance'
     labels:
       - 'perf'
-change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 template: |
   ## What's Changed
 

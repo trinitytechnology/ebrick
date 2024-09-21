@@ -2,18 +2,44 @@ name: Build eBrick
 
 on:
   push:
+    branches:
+      - main          # Main branch
+    paths-ignore:
+      - '**/*.md'         # Ignore markdown files (documentation)
+      - 'docs/**'         # Ignore the whole docs directory
+      - 'README.md'       # Ignore README file
+      - '.gitignore'      # Ignore .gitignore changes
+      - '.editorconfig'   # Ignore editor configuration changes
+      - '.vscode/**'      # Ignore VSCode specific files
+      - '**/*.test'       # Ignore test output files
+      - '**/*.log'        # Ignore log files
+      - '**/*.txt'        # Ignore text files (if any)
+      - 'vendor/**'       # Ignore vendor directory
+      - 'LICENSE'         # Ignore license file
+      - '.env'            # Ignore environment variable files
+      - '.github/workflows/**'  # Ignore workflow changes if desired
+      - 'bin/**'          # Ignore binary artifacts
+      - 'dist/**'         # Ignore distribution artifacts
+
   pull_request:
     branches:
-      - main
-    paths:
-      - '**/*.go'       # Go source files
-      - '**/*.tmpl'     # Template files
-      - '**/*.tpl'      # Template files
-      - 'go.mod'        # Dependency management file
-      - 'go.sum'        # Dependency lock file
-      - '**/*.yaml'  # YAML config files
-      - '**/*.yml'   # YAML config files
-      - '.github/workflows/*'  # CI/CD workflow files
+      - main          # Main branch
+    paths-ignore:
+      - '**/*.md'         # Ignore markdown files (documentation)
+      - 'docs/**'         # Ignore the whole docs directory
+      - 'README.md'       # Ignore README file
+      - '.gitignore'      # Ignore .gitignore changes
+      - '.editorconfig'   # Ignore editor configuration changes
+      - '.vscode/**'      # Ignore VSCode specific files
+      - '**/*.test'       # Ignore test output files
+      - '**/*.log'        # Ignore log files
+      - '**/*.txt'        # Ignore text files (if any)
+      - 'vendor/**'       # Ignore vendor directory
+      - 'LICENSE'         # Ignore license file
+      - '.env'            # Ignore environment variable files
+      - '.github/workflows/**'  # Ignore workflow changes if desired
+      - 'bin/**'          # Ignore binary artifacts
+      - 'dist/**'         # Ignore distribution artifacts
 jobs:
   build:
     runs-on: ubuntu-latest

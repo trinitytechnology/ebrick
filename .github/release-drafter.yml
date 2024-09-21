@@ -1,5 +1,5 @@
-name-template: 'v$NEXT_PATCH_VERSION'
-tag-template: 'v$NEXT_PATCH_VERSION'
+name-template: 'v$RESOLVED_VERSION 🌈'
+tag-template: 'v$RESOLVED_VERSION'
 categories:
   - title: '🚀 New Features'
     labels:
@@ -23,6 +23,10 @@ categories:
     labels:
       - 'breaking-change'
       - 'major'
+exclude-labels:
+  - 'skip-changelog'
+exclude-contributors:
+  - 'app/dependabot'
 template: |
   ## What's Changed
 
@@ -34,3 +38,29 @@ version-resolver:
     labels: ['minor' , 'feat', 'enhancement']
   patch:
     labels: ['patch', 'bug', 'chore', 'fix', 'refactor', 'docs', 'perf']
+  default: patch
+
+autolabeler:
+  - label: 'chore'
+    files:
+      - '*.md'
+      - '.gitignore' 
+      - '.editorconfig'
+      - '.vscode/**'
+      - '**/*.test'
+      - '**/*.log'
+    branch:
+      - '/docs{0,1}\/.+/'
+      - '/chore\/.+/'
+  - label: 'bug'
+    branch:
+      - '/fix\/.+/'
+    title:
+      - '/fix/i'
+  - label: 'enhancement'
+    branch:
+      - '/feature\/.+/'
+      - '/enhancement\/.+/'
+      - '/feat\/.+/'
+    body:
+      - '/JIRA-[0-9]{1,4}/'

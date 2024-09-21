@@ -3,7 +3,7 @@ name: Build eBrick
 on:
   push:
     branches:
-      - main          # Main branch
+      - main
     paths-ignore:
       - '**/*.md'         # Ignore markdown files (documentation)
       - 'docs/**'         # Ignore the whole docs directory
@@ -11,19 +11,13 @@ on:
       - '.gitignore'      # Ignore .gitignore changes
       - '.editorconfig'   # Ignore editor configuration changes
       - '.vscode/**'      # Ignore VSCode specific files
-      - '**/*.test'       # Ignore test output files
-      - '**/*.log'        # Ignore log files
-      - '**/*.txt'        # Ignore text files (if any)
-      - 'vendor/**'       # Ignore vendor directory
       - 'LICENSE'         # Ignore license file
       - '.env'            # Ignore environment variable files
       - '.github/workflows/**'  # Ignore workflow changes if desired
-      - 'bin/**'          # Ignore binary artifacts
-      - 'dist/**'         # Ignore distribution artifacts
-
+      - '.github/**'  # Ignore workflow changes if desired
   pull_request:
     branches:
-      - main          # Main branch
+      - main
     paths-ignore:
       - '**/*.md'         # Ignore markdown files (documentation)
       - 'docs/**'         # Ignore the whole docs directory
@@ -31,15 +25,10 @@ on:
       - '.gitignore'      # Ignore .gitignore changes
       - '.editorconfig'   # Ignore editor configuration changes
       - '.vscode/**'      # Ignore VSCode specific files
-      - '**/*.test'       # Ignore test output files
-      - '**/*.log'        # Ignore log files
-      - '**/*.txt'        # Ignore text files (if any)
       - 'vendor/**'       # Ignore vendor directory
       - 'LICENSE'         # Ignore license file
-      - '.env'            # Ignore environment variable files
       - '.github/workflows/**'  # Ignore workflow changes if desired
-      - 'bin/**'          # Ignore binary artifacts
-      - 'dist/**'         # Ignore distribution artifacts
+      - '.github/**'  # Ignore workflow changes if desired
 jobs:
   build:
     runs-on: ubuntu-latest

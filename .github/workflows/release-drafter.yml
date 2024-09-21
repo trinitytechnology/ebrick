@@ -1,19 +1,22 @@
 name: Release Drafter
+
 on:
   push:
     branches:
-      - main  # Adjust if you use a different default branch
+      - main
   pull_request:
-    types: [opened, closed, reopened, edited]
-  workflow_dispatch:
+    branches:
+      - main
+    types: [closed, opened, synchronize, reopened]
+
 jobs:
   update_release_draft:
+    permissions:
+      contents: write # for release-drafter/release-drafter to create a github release
+      pull-requests: write # for release-drafter/release-drafter to add label to PR
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Draft Release
-        uses: release-drafter/release-drafter@v6
-        with:
-          config-name: release-drafter.yml
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # Drafts your next Release notes as Pull Requests are merged into "main"
+      - uses: release-drafter/release-drafter@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

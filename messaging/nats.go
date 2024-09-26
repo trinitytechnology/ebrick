@@ -88,7 +88,7 @@ func (n *natsJetStream) Close() error {
 }
 
 // Publish publishes a CloudEvent to a JetStream subject with tracing context.
-func (n *natsJetStream) Publish(ctx context.Context, ev event.Event) error {
+func (n *natsJetStream) Publish(subject string, ctx context.Context, ev event.Event) error {
 	data, err := ev.MarshalJSON()
 	if err != nil {
 		log.Error("failed to marshal event", zap.Error(err))
@@ -103,7 +103,7 @@ func (n *natsJetStream) Publish(ctx context.Context, ev event.Event) error {
 	}
 
 	_, err = n.js.PublishMsg(&nats.Msg{
-		Subject: ev.Type(),
+		Subject: subject,
 		Data:    data,
 		Header:  headers,
 	})

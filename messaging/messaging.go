@@ -12,7 +12,7 @@ var (
 )
 
 type CloudEventStream interface {
-	Publish(ctx context.Context, ev event.Event) error
+	Publish(topic string, ctx context.Context, ev event.Event) error
 	Subscribe(topic, group string, handler func(msg *event.Event, ctx context.Context) error) error
 	SubscribeDLQ(topic string, handler func(msg any, ctx context.Context) error) error
 	CreateStream(stream string, topics []string) error

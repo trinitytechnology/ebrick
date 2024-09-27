@@ -2,14 +2,12 @@ package module
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/trinitytechnology/ebrick/cache"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
 
 type Options struct {
 	Database *gorm.DB
-	Cache    cache.Cache
 	Logger   *zap.Logger
 	Router   *gin.Engine
 }
@@ -30,12 +28,6 @@ func newOptions(opts ...Option) *Options {
 func Database(db *gorm.DB) Option {
 	return func(o *Options) {
 		o.Database = db
-	}
-}
-
-func Cache(c cache.Cache) Option {
-	return func(o *Options) {
-		o.Cache = c
 	}
 }
 

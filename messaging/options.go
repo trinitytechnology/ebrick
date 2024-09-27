@@ -1,9 +1,5 @@
 package messaging
 
-import (
-	"github.com/trinitytechnology/ebrick/config"
-)
-
 type Options struct {
 	Url      string
 	UserName string
@@ -15,13 +11,12 @@ type Options struct {
 type Option func(*Options)
 
 func newOptions(opts ...Option) *Options {
-	cfg := config.GetConfig().Messaging
 	opt := &Options{
-		Url:      cfg.Url,
-		UserName: cfg.UserName,
-		Password: cfg.Password,
-		Enable:   cfg.Enable,
-		Type:     cfg.Type,
+		Url:      msgConfig.Url,
+		UserName: msgConfig.UserName,
+		Password: msgConfig.Password,
+		Enable:   msgConfig.Enable,
+		Type:     msgConfig.Type,
 	}
 	for _, o := range opts {
 		o(opt)

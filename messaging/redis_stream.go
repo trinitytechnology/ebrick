@@ -32,9 +32,8 @@ var DefaultConsumerConfig = ConsumerConfig{
 
 // InitRedisClient initializes and returns a new Redis client.
 func InitRedisClient() *rueidis.Client {
-	cfg := config.GetConfig().Messaging
 
-	client, err := rueidis.NewClient(rueidis.ClientOption{InitAddress: []string{cfg.Url}})
+	client, err := rueidis.NewClient(rueidis.ClientOption{InitAddress: []string{msgConfig.Url}})
 	if err != nil {
 		log.Fatal("failed to create Redis client", zap.Error(err))
 		return nil
@@ -44,7 +43,7 @@ func InitRedisClient() *rueidis.Client {
 
 // NewRedisStream creates a new instance of redisStream, connecting to Redis.
 func NewRedisStream() CloudEventStream {
-	redisURL := config.GetConfig().Messaging.Url
+	redisURL := msgConfig.Url
 	client := InitRedisClient()
 	log.Info("Connected to Redis", zap.String("url", redisURL))
 

@@ -29,5 +29,6 @@ type ConsumerConfig struct {
 	InactiveThreshold time.Duration `json:"inactive_threshold,omitempty"`
 
 	// Generally inherited by parent stream and other markers, now can be configured directly.
-	Replicas int `json:"num_replicas"`
+	Replicas int    `json:"num_replicas"`
+	StartID  string `json:"start_id"`
 }

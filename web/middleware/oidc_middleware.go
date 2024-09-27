@@ -15,8 +15,7 @@ import (
 var verifier *oidc.IDTokenVerifier
 var provider *oidc.Provider
 
-func InitOIDC() {
-	cfg := config.GetConfig().Oidc
+func InitOIDC(cfg *config.OidcConfig) {
 	logger := logger.DefaultLogger
 	if cfg.Enable {
 		logger.Info("Setting OIDC...", zap.String("issuer", cfg.Issuer))

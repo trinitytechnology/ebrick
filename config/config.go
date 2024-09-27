@@ -26,7 +26,6 @@ type Config struct {
 	Env           string
 	ORM           ORMConfig
 	Oidc          OidcConfig
-	Messaging     MessagingConfig
 	Logger        LoggerConfig
 	Observability ObservabilityConfig
 	Modules       []ModuleConfig
@@ -76,15 +75,6 @@ type OidcConfig struct {
 	ClientId     string
 	ClientSecret string
 	Enable       bool
-}
-
-// MessagingConfig represents the messaging configuration.
-type MessagingConfig struct {
-	Url      string
-	UserName string
-	Password string
-	Enable   bool
-	Type     string
 }
 
 // ObservabilityConfig represents the observability configuration.

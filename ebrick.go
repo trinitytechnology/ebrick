@@ -43,7 +43,6 @@ func NewApplication(opts ...Option) App {
 		module.Logger(op.Logger),
 		module.Database(op.Database),
 		module.Cache(op.Cache),
-		module.EventStream(op.EventStream),
 		module.Router(op.HttpServer.GetRouter()),
 	)
 

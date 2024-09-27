@@ -6,6 +6,7 @@ import (
 	"github.com/trinitytechnology/ebrick/logger"
 	"github.com/trinitytechnology/ebrick/observability"
 	"github.com/trinitytechnology/ebrick/web"
+	"github.com/trinitytechnology/ebrick/web/middleware"
 	"go.uber.org/zap"
 )
 
@@ -22,8 +23,13 @@ func newOptions(opts ...Option) Options {
 	serverCfg := config.GetConfig().Server
 	envCfg := config.GetConfig().Env
 	obsCfg := config.GetConfig().Observability
+	oidcCfg := config.GetConfig().Oidc
 
 	webRouter := web.InitRouter()
+
+	if oidcCfg.Enable {
+		middleware.InitOIDC(&oidcCfg)
+	}
 
 	if obsCfg.Tracing.Enable {
 		webRouter.Use(observability.TracingMiddleware(), observability.LoggingWithTraceIDMiddleware())

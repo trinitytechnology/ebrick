@@ -9,6 +9,8 @@ import (
 	"go.uber.org/zap"
 )
 
+var DefaultCache Cache = NewCache()
+
 // Cache is the interface that wraps the cache.
 // Cache represents a generic cache interface.
 type Cache interface {
@@ -58,30 +60,16 @@ type Cache interface {
 	GetType() string
 }
 
-var (
-	DefaultCache Cache
-	log          = logger.DefaultLogger
-)
-
-func init() {
-	DefaultCache = NewCache()
-	if DefaultCache == nil {
-		log.Warn("Cache is disabled or not properly configured")
-	} else {
-		log.Info("Cache system initialized successfully")
-	}
-}
-
 // InitCache is a function that initializes a cache.
 func NewCache() Cache {
 	var c Cache
-	log := logger.DefaultLogger
+	logger := logger.DefaultLogger
 
 	if config.GetConfig().Cache.Enable {
 		if config.GetConfig().Cache.Type == "redis" {
 			c = NewRedisStore()
 		} else {
-			log.Fatal("Invalid cache type", zap.String("type", config.GetConfig().Cache.Type))
+			logger.Fatal("Invalid cache type", zap.String("type", config.GetConfig().Cache.Type))
 		}
 	}
 	return c

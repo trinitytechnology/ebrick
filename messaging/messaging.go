@@ -4,14 +4,16 @@ import (
 	"context"
 
 	"github.com/cloudevents/sdk-go/v2/event"
+	"github.com/trinitytechnology/ebrick/config"
 	"github.com/trinitytechnology/ebrick/logger"
 	"go.uber.org/zap"
 )
 
 var (
-	DefaultCloudEventStream CloudEventStream
-	log                     = logger.DefaultLogger // zap.Logger
+	DefaultCloudEventStream CloudEventStream = NewCloudEventStream()
 )
+
+var log *zap.Logger
 
 type CloudEventStream interface {
 	Publish(topic string, ctx context.Context, ev event.Event) error
@@ -22,38 +24,18 @@ type CloudEventStream interface {
 	Close() error
 }
 
-// init automatically initializes the CloudEventStream if the package is imported.
-func init() {
-	DefaultCloudEventStream = initializeCloudEventStream()
-	if DefaultCloudEventStream == nil {
-		log.Warn("Messaging is disabled or not properly configured")
-	} else {
-		log.Info("Messaging system initialized successfully")
-	}
-}
+func NewCloudEventStream() CloudEventStream {
+	log = logger.DefaultLogger
 
-// initializeCloudEventStream sets up the appropriate CloudEventStream based on the config.
-func initializeCloudEventStream() CloudEventStream {
-	// Load the config
-	err := loadConfig()
-	if err != nil {
-		return nil
+	// check messaging is enabled then check type is Nats then init Nats
+	cfg := config.GetConfig().Messaging
+	if cfg.Enable {
+		if cfg.Type == "nats" {
+			return NewNatsJetStream()
+		}
+		if cfg.Type == "redis-stream" {
+			return NewRedisStream()
+		}
 	}
-
-	if msgConfig == nil || !msgConfig.Enable {
-		log.Error("Messaging configuration is not enabled or is missing")
-		return nil
-	}
-
-	log.Info("Initializing messaging", zap.String("type", msgConfig.Type))
-
-	switch msgConfig.Type {
-	case "nats":
-		return NewNatsJetStream()
-	case "redis-stream":
-		return NewRedisStream()
-	default:
-		log.Warn("Unsupported messaging type", zap.String("type", msgConfig.Type))
-		return nil
-	}
+	return nil
 }
